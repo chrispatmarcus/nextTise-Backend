@@ -11,6 +11,7 @@ const validateToken = require("../middleware/validateTokenHandler");
 
 router.use(validateToken);
 // Routes for all contacts
+// Routes for all contacts
 router
   .route("/")
   .get(getContacts) // Get all contacts
