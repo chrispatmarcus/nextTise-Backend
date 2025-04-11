@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Contact = require("../models/contactModels");
+const News = require("../models/newsModel")
 const { ReturnDocument } = require("mongodb");
 
 //@desc Get all contacts
