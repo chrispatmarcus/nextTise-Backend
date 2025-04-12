@@ -78,7 +78,7 @@ const deleteCourse = asyncHandler(async (req, res) => {
   const course = await Course.findById(req.params.id);
   if (!course) {
     res.status(404);
-    throw new Error("Course is not  found");
+    throw new Error("Course is not  found. enter correct id");
   }
 
   // Condition to check if the user is deleting only their own courses
