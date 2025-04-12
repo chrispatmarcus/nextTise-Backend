@@ -3,10 +3,9 @@ const dotenv = require("dotenv").config();
 const app = require("../server");
 
 const uri =
-  "mongodb+srv://MarcusChrispat:Vande@chrispatcluster.sxkhx.mongodb.net/MarcusChrispat?retryWrites=true&w=majority";
+  "mongodb+srv://MarcusChrispat:Vande@chrispatcluster.sxkhx.mongodb.net/nextTise?retryWrites=true&w=majority";
 
-
-  const connectDb = async () => {
+const connectDb = async () => {
   try {
     const conn = await mongoose.connect(uri);
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);

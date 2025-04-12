@@ -6,3 +6,5 @@ npm install express-async-handler
 npm install mongoose
 npm install bcrypt
 npm i jsonwebtoken
+
+ user_id: req.user.id,
