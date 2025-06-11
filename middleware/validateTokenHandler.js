@@ -3,21 +3,27 @@ const jwt = require("jsonwebtoken");
 
 const validateToken = asyncHandler(async (req, res, next) => {
   let token;
-  let authHeader = req.headers.Authorization || req.headers.authorization;
-  if (authHeader && authHeader.startsWith("Bearer")) {
+  let authHeader = req.headers.authorization || req.headers.Authorization;
+
+  if (authHeader && authHeader.startsWith("Bearer ")) {
     token = authHeader.split(" ")[1];
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-      if (err) {
-        res.status(401);
-        throw new Error("user is not authorized");
-      }
-      req.user = decoded.user;
-      next();
-    });
-    if (!token){
-        res.status(401);
-        throw new Error("user is not authorised or token is missing in the request")
-    }
+  }
+
+  if (!token) {
+    res.status(401);
+    throw new Error("Token is missing");
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    // IMPORTANT: make sure your token payload contains id directly or adjust accordingly
+    req.user = decoded;
+
+    console.log("Decoded payload:", decoded); // Debugging
+    next();
+  } catch (err) {
+    res.status(401);
+    throw new Error("User is not authorized");
   }
 });
 

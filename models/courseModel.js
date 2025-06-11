@@ -2,26 +2,26 @@ const mongoose = require("mongoose");
 
 const courseSchema = mongoose.Schema(
   {
-    user_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
-    },
+    // user_id: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true,
+    //   ref: "User",
+    // },
     name: {
       type: String,
-      required: [true, "please add the course name"],
+      required: [true, "Please add the course name"],
     },
-    subject: {
+    description: {
       type: String,
-      required: [true, "please add the course subject"],
+      required: [true, "Please add the course description"],
     },
-    location: {
+    instructor: {
       type: String,
-      required: [true, "please add the course location"],
+      required: [true, "Please add the instructor name"],
     },
-    date: {
-      type: Date,
-      required: [true, "please add the course date"],
+    duration: {
+      type: String,
+      required: [true, "Please add the course duration"],
     },
   },
   {
@@ -30,32 +30,3 @@ const courseSchema = mongoose.Schema(
 );
 
 module.exports = mongoose.model("Course", courseSchema);
-
-// const mongoose = require("mongoose");
-// const contactSchema = mongoose.Schema(
-//   {
-//     user_id: {
-//       type: mongoose.Schema.Types.ObjectId,
-//       required: true,
-//       ref: "User",
-//     },
-//     name: {
-//       type: String,
-//       required: [true, "please add the contact name"],
-//     },
-//     email: {
-//       type: String,
-//       required: [true, "please add the contact email address"],
-//       unique: true,
-//     },
-//     phone: {
-//       type: String,
-//       required: [true, "please add the contact phone number"],
-//     },
-//   },
-//   {
-//     Timestamps: true,
-//   }
-// );
-
-// module.exports = mongoose.model("Contact", contactSchema);

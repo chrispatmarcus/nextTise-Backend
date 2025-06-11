@@ -24,6 +24,7 @@ const registerUser = asyncHandler(async (req, res) => {
     username,
     phoneNum,
     password: hashedPassword,
+    // user_id: req.user.id,
   });
   console.log(`user created ${user}`);
   if (user) {
@@ -38,12 +39,13 @@ const registerUser = asyncHandler(async (req, res) => {
 //@route Post /api/users/login
 //@access public
 const loginUser = asyncHandler(async (req, res) => {
-  const { phoneNum, password } = req.body;
-  if (!phoneNum || !password) {
+  const { username, password } = req.body;
+  if (!username || !password) {
     res.status(400);
     throw new Error("All fields are mandatory");
   }
-  const user = await User.findOne({ phoneNum });
+  const user = await User.findOne({ username });
+
   if (!user) {
     res.status(400);
     throw new Error("user not registered");
@@ -54,13 +56,23 @@ const loginUser = asyncHandler(async (req, res) => {
       {
         user: {
           username: user.username,
-          phoneNum: user.phoneNum,
           id: user.id,
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "45m" }
     );
+    // const accessToken = jwt.sign(
+    //   {
+    //     user: {
+    //       username: user.username,
+    //       phoneNum: user.phoneNum,
+    //       id: user.id,
+    //     },
+    //   },
+    //   process.env.ACCESS_TOKEN_SECRET,
+    //   { expiresIn: "45m" }
+    // );
     res.status(200).json({ accessToken });
   }
 });
